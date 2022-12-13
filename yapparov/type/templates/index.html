@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <title>Document</title>
+</head>
+<body>
+<form method="POST" action="create">
+        {% csrf_token %}
+        <p>
+            <label>Ведите название статьи</label><br>
+            <input type="text" name="title" value="{{stat.titel}}">
+        </p>
+        <p>
+            <label>Ведите описание статьи</label><br>
+            <input type="text" name="subtile" value="{{stat.subtile}}">
+        </p>
+        <p>
+            <label>Ведите ссылку на фото</label><br>
+            <input type="url" name="URL" value="{{stat.URL}}">
+        </p>
+        <input type="submit" value="Send">
+    </form>
+
+    <h2>Список постов</h2>
+    <table>
+        {% for post in stat %}
+        
+            {{ post.id }}
+            {{ post.title }}<br>
+            {{ post.subtile }}<br>
+            <img src="{{ post.URL }}" alt="awd"><br>
+            <a href="edit/{{post.id}}">edit</a> | <a href="delete/{{post.id}}">delete</a><br>
+        
+        {% endfor %}
+        <img src="" alt="">
+    </table>
+</body>
+</html>
